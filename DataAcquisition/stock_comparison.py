@@ -84,7 +84,7 @@ if ticker_comparison:
 all_data = pd.DataFrame()
 
 # cap retry at 5 retries in case of network failure
-max_retries = 5
+max_retries = 20
 
 for ticker in user_list:
     success = False
