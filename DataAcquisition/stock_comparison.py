@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from streamlit_autorefresh import st_autorefresh
 import time
+import pytz
 
 st_autorefresh(interval=900000, key="datarefresh")
 
@@ -251,7 +252,9 @@ st.line_chart(
     color='Ticker',
 )
 
-last_updated = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+utc_now = datetime.now(pytz.utc)
+est_now = utc_now.astimezone(pytz.timezone('US/Eastern'))
+last_updated = est_now.strftime("%Y-%m-%d %H:%M:%S EST")
 
 # Display the last updated timestamp
 st.markdown(
