@@ -4,7 +4,10 @@ import pandas as pd
 import math
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
+from streamlit_autorefresh import st_autorefresh
 import time
+
+st_autorefresh(interval=900000, key="datarefresh")
 
 st.title ('Stock Comparison Tool')
 
@@ -248,6 +251,23 @@ st.line_chart(
     color='Ticker',
 )
 
+last_updated = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+# Display the last updated timestamp
+st.markdown(
+    f"""
+    <div style='position: fixed; 
+                bottom: 0; 
+                right: 0; 
+                width: 100%; 
+                background-color: lightgrey; 
+                text-align: right; 
+                padding: 5px;'>
+        Last updated: {last_updated}
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 
 
